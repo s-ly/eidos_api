@@ -1,2 +1,2 @@
-# eidos_api
+# EIDOS API
 API for Blender on EIDOS projects.
