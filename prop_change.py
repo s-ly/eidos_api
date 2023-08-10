@@ -6,7 +6,7 @@ class PropChange_Panel(bpy.types.Panel):
     bl_idname = 'eidos_prop_change'  # может быть одновременно несколько панелей    
     bl_space_type = 'VIEW_3D' # месторасположение панели
     bl_region_type = 'UI'     # уточняет регион, где именно
-    bl_category = 'EIDOS'      # Группа для панели    
+    bl_category = 'EIDOS_DEV'      # Группа для панели    
     bl_label = 'Prop change'   # заголовок панели  
     
     def draw(self, context): 
@@ -20,13 +20,13 @@ class PropChange_Panel(bpy.types.Panel):
         # my_prop = scene.my_tool
         
         # Достут к свойству (объект)
-        scene2 = context.object
-        my_prop = scene2.my_tool
+        # scene2 = context.object
+        # my_prop = scene2.my_tool
 
-        layout.prop(my_prop, "my_float")
+        # layout.prop(my_prop, "my_float")
         # obj.data.shape_keys.key_blocks[1].value = 0.75
 
-        # layout.operator("object.eidos_prop_change_op", text='В') 
+        layout.operator("object.modal_operator", text='В') 
         # bpy.ops.object.eidos_prop_change_op('EXEC_DEFAULT')
 
 
@@ -43,9 +43,11 @@ class ModalOperator(bpy.types.Operator):
 
     def __init__(self):
         print("Start")
+        self.report({'INFO'}, "Start")
 
     def __del__(self):
         print("End")
+        self.report({'INFO'}, "End")
 
     def execute(self, context):
         context.object.location.x = self.value / 100.0
@@ -59,6 +61,7 @@ class ModalOperator(bpy.types.Operator):
             return {'FINISHED'}
         elif event.type in {'RIGHTMOUSE', 'ESC'}:  # Cancel
             # Revert all changes that have been made
+            # Отменить все сделанные изменения
             context.object.location.x = self.init_loc_x
             return {'CANCELLED'}
 
@@ -74,16 +77,18 @@ class ModalOperator(bpy.types.Operator):
 
 
 # Only needed if you want to add into a dynamic menu.
-def menu_func(self, context):
-    self.layout.operator(ModalOperator.bl_idname, text="Modal Operator")
+# def menu_func(self, context):
+#     self.layout.operator(ModalOperator.bl_idname, text="Modal Operator")
 
 
 # Register and add to the object menu (required to also use F3 search "Modal Operator" for quick access).
 bpy.utils.register_class(ModalOperator)
-bpy.types.VIEW3D_MT_object.append(menu_func)
+bpy.utils.register_class(PropChange_Panel)
+# bpy.types.VIEW3D_MT_object.append(menu_func)
 
 # test call
-bpy.ops.object.modal_operator('INVOKE_DEFAULT')
+# Включить оператор при старте скрипта
+# bpy.ops.object.modal_operator('INVOKE_DEFAULT')
 
 
 
