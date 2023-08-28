@@ -75,7 +75,8 @@ class ModalOperator(bpy.types.Operator):
         пока не вернет {'FINISHED'} или {'CANCELLED'}.
         В ней мы вызываем повторяемое действие.
         """
-        if event.type == 'MOUSEMOVE':  # Apply
+        # if event.type == 'MOUSEMOVE':  # Apply
+        if event.type == 'LEFTMOUSE':  # Apply
             # self.value = event.mouse_x
             self.execute(context)
         
