@@ -43,11 +43,21 @@ class ModalOperator(bpy.types.Operator):
     bl_label = "Simple Modal Operator"
 
     def execute(self, context):
-        "Действие"
-        print("ok")
-        print(bpy.context.scene.my_tool.my_float)
+        """Действие"""
 
+        print(bpy.context.scene.my_tool.my_float)
+        self.key_action(context)
         return {'FINISHED'}
+
+    def key_action(self, context):
+        obj_sel = bpy.context.selected_objects  # выделенные объекты
+        for i in obj_sel:
+            self.obj_action(context, i)
+
+    def obj_action(self, context, obj):
+        """ Принимает ссылку на объект и делает с ним действие. """
+        print(obj.name)
+        obj.data.shape_keys.key_blocks[1].value = bpy.context.scene.my_tool.my_float
 
 
 class Prop_PropertyGroup(bpy.types.PropertyGroup):
@@ -61,7 +71,7 @@ def msgbus_callback_1(*args):
     Метод вызывается когда меняем свойство по подписке.
     В ём вызывается оператор.
     """
-    print("Something changed!", args)
+    # print("Something changed!", args)
     bpy.ops.object.modal_operator()
 
 
