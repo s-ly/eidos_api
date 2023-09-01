@@ -19,11 +19,11 @@ class PropChange_Panel(bpy.types.Panel):
 
         # Достут к свойству (сцена)
         scene = context.scene
-        my_prop = scene.my_tool
+        my_prop = scene.my_tool_prop_change
 
         # Достут к свойству (объект)
         # scene2 = context.object
-        # my_prop = scene2.my_tool
+        # my_prop = scene2.my_tool_prop_change
 
         layout.prop(my_prop, "my_string_name_def")
         layout.prop(my_prop, "my_float")
@@ -43,7 +43,7 @@ class ModalOperator(bpy.types.Operator):
     def execute(self, context):
         """Действие"""
 
-        print(bpy.context.scene.my_tool.my_float)
+        print(bpy.context.scene.my_tool_prop_change.my_float)
         self.key_action(context)
         return {'FINISHED'}
 
@@ -57,9 +57,9 @@ class ModalOperator(bpy.types.Operator):
         print(obj.name)
         all_shape_keys = obj.data.shape_keys.key_blocks # список всех форм 
         for i in all_shape_keys:
-            if i.name == bpy.context.scene.my_tool.my_string_name_def:
-                i.value = bpy.context.scene.my_tool.my_float
-        # obj.data.shape_keys.key_blocks[1].value = bpy.context.scene.my_tool.my_float
+            if i.name == bpy.context.scene.my_tool_prop_change.my_string_name_def:
+                i.value = bpy.context.scene.my_tool_prop_change.my_float
+        # obj.data.shape_keys.key_blocks[1].value = bpy.context.scene.my_tool_prop_change.my_float
 
 
 class Prop_PropertyGroup(bpy.types.PropertyGroup):
@@ -85,13 +85,13 @@ def register():
     bpy.utils.register_class(Prop_PropertyGroup)
 
     # подключение глобального свойства
-    bpy.types.Scene.my_tool = bpy.props.PointerProperty(
+    bpy.types.Scene.my_tool_prop_change = bpy.props.PointerProperty(
         type=Prop_PropertyGroup)  # Сцена
-    # bpy.types.Object.my_tool = bpy.props.PointerProperty(type= Prop_PropertyGroup) # Объект
+    # bpy.types.Object.my_tool_prop_change = bpy.props.PointerProperty(type= Prop_PropertyGroup) # Объект
 
     #####################################################################
     # Подписка прослушивания события
-    subscribe_to = bpy.context.scene.my_tool  # ссылка на отслеживаемое свойство
+    subscribe_to = bpy.context.scene.my_tool_prop_change  # ссылка на отслеживаемое свойство
     owner = object()  # хуй знает
     notify = msgbus_callback_1  # эта функция вызовится при изменении
     args = (11, 2, 3, 779007)  # нахуй ненужные обязательные аргументы
@@ -107,7 +107,7 @@ def unregister():
     bpy.utils.unregister_class(Prop_PropertyGroup)
 
     # отключение глобального свойства
-    del bpy.types.Object.my_tool  # Объект
+    del bpy.types.Object.my_tool_prop_change  # Объект
 
     # bpy.msgbus.clear_by_owner(owner) # должно отписываться от события, пока не понял
 
