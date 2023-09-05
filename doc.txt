@@ -1,1 +1,4 @@
 https://www.youtube.com/watch?v=8mSSCQ7LGVo&list=PLFtLHTf5bnym_wk4DcYIMq1DkjqB7kDb-&index=4
+
+Меши с Python & Blender: двумерная сетка
+https://habr.com/ru/articles/646527/
