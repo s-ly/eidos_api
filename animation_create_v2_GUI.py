@@ -9,7 +9,8 @@ frames_MV = [0, 2, 5, 11, 15, 19, 22] # MV
 frames_TV = [0, 5, 11, 15, 19, 22] # TV
 frames_PV = [0, 3, 6, 9, 10, 11, 12, 15, 17, 19] # PV
 frames_AV = [0, 3, 5, 6, 9, 11, 13, 15, 17, 19, 21, 23] # AV
-frames_Blizzard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] # Blizzard
+frames_25_All_Frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] 
+frames_125_All_Frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124] 
 frames_MV_Stenosis = [0, 11, 12, 15, 19, 22] # MV_Stenosis
 frames_Abd_Aort_IVC = [0, 11, 15, 19, 25, 36, 40, 44, 50, 61, 65, 69, 75, 86, 90, 94, 100, 111, 115, 119]
 
@@ -50,7 +51,8 @@ class EIDOS_AnimationCreate_PG_OBJ(bpy.types.PropertyGroup):
                 ('OBJ_TV', "TV", str(frames_TV)),
                 ('OBJ_PV', "PV", str(frames_PV)),
                 ('OBJ_AV', "AV", str(frames_AV)),
-                ('OBJ_Blizzard', "Blizzard", str(frames_Blizzard)),
+                ('OBJ_25_All_Frames', "25_All_Frames", str(frames_25_All_Frames)),
+                ('OBJ_125_All_Frames', "125_All_Frames", str(frames_125_All_Frames)),
                 ('OBJ_MV_Stenosis', "MV_Stenosis", str(frames_MV_Stenosis)),
                 ('OBJ_Abd_Aort_IVC', 'Abd_Aort, IVC (frame_end = 125)', str(frames_Abd_Aort_IVC))
             ]
@@ -92,7 +94,8 @@ class EIDOS_AnimationCreate_OT_AniCreate(bpy.types.Operator):
         if my_prop.obj_enum == 'OBJ_TV': frames = frames_TV
         if my_prop.obj_enum == 'OBJ_PV': frames = frames_PV
         if my_prop.obj_enum == 'OBJ_AV': frames = frames_AV
-        if my_prop.obj_enum == 'OBJ_Blizzard': frames = frames_Blizzard
+        if my_prop.obj_enum == 'OBJ_25_All_Frames': frames = frames_25_All_Frames
+        if my_prop.obj_enum == 'OBJ_125_All_Frames': frames = frames_125_All_Frames
         if my_prop.obj_enum == 'OBJ_MV_Stenosis': frames = frames_MV_Stenosis
         if my_prop.obj_enum == 'OBJ_Abd_Aort_IVC': frames = frames_Abd_Aort_IVC
 
